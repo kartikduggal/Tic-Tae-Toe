@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #548687;
+    color: white;
+}
+
+body.light-mode {
+    background-color: #fff8df;
+    color: #263238;
+}
+
+body.light-mode .scoreboard {
+    color: #37515a;
+}
+
+body.light-mode #turn-indicator {
+    color: #2f6f73;
+}
+
+body.light-mode #msg {
+    color: #263238;
+}
+
+body.light-mode .box {
+    background-color: #e7f6ff;
+    color: #d45b45;
+    box-shadow: 0 0 1rem rgba(92, 129, 148, 0.22);
+}
+
+body.light-mode #reset-btn,
+body.light-mode #theme-btn {
+    background-color: #2f6f73;
+    color: white;
+}
+
+.scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+#turn-indicator {
+    color: #ffffc7;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.container {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game {
+    position: relative;
+    height: 60vmin;
+    width: 60vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vmin;
+}
+
+.box {
+    position: relative;
+    z-index: 1;
+    height: 18vmin;
+    width: 18vmin;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.3);
+    font-size: 8vmin;
+    color: #b0413e;
+    background-color: #ffffc7;
+}
+
+#win-line {
+    position: absolute;
+    z-index: 2;
+    width: 0;
+    height: 1.1vmin;
+    margin-top: -0.55vmin;
+    background-color: #ffd166;
+    border-radius: 999px;
+    box-shadow: 0 0 0.8rem rgba(255, 209, 102, 0.75);
+    pointer-events: none;
+    transform-origin: left center;
+    transition: width 0.45s ease;
+}
+
+#win-line.show {
+    width: var(--line-width);
+}
+
+body.light-mode #win-line {
+    background-color: #ff8a65;
+    box-shadow: 0 0 0.8rem rgba(255, 138, 101, 0.55);
+}
+
+#reset-btn {
+    padding: 1rem;
+    font-size: 1.25rem;
+    background-color: #191913;
+    color: white;
+    border-radius: 1rem;
+    border: none;
+}
+
+#theme-btn {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #191913;
+    color: white;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.25);
+    cursor: pointer;
+}
+
+#msg{
+    font-size:2rem;
+    color:white;
+    margin-top:1rem;
+    margin-bottom:1rem;
+    font-weight:bold;
+}
