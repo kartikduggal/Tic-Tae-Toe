@@ -1,5 +1,11 @@
 let boxes = document.querySelectorAll(".box");
+let playerForm = document.getElementById("player-form");
+let playerXNameInput = document.getElementById("player-x-name");
+let playerONameInput = document.getElementById("player-o-name");
+let xPlayerLabel = document.getElementById("x-player-label");
+let oPlayerLabel = document.getElementById("o-player-label");
 let resetBtn = document.getElementById("reset-btn");
+let gameOverBtn = document.getElementById("game-over-btn");
 let themeBtn = document.getElementById("theme-btn");
 let msg = document.getElementById("msg");
 let turnIndicator = document.getElementById("turn-indicator");
@@ -9,10 +15,16 @@ let drawScore = document.getElementById("draw-score");
 let game = document.querySelector(".game");
 let winLine = document.getElementById("win-line");
 
-let turn0 = true; // true for 0's turn, false for X's turn
+let turnO = false; // false for X's turn, true for O's turn
+let gameStarted = false;
+let gameFinished = false;
+let players = {
+    X: "Player X",
+    O: "Player O"
+};
 let scores = {
     X: 0,
-    "0": 0,
+    O: 0,
     draw: 0
 };
 
@@ -27,13 +39,26 @@ const winPatterns = [
     [6, 7, 8]
 ];
 const updateScoreboard = () => {
+    xPlayerLabel.innerText = players.X;
+    oPlayerLabel.innerText = players.O;
     xScore.innerText = scores.X;
-    oScore.innerText = scores["0"];
+    oScore.innerText = scores.O;
     drawScore.innerText = scores.draw;
 };
 
 const updateTurnIndicator = () => {
-    turnIndicator.innerText = `Current Turn : ${turn0 ? "0" : "X"}`;
+    if (!gameStarted) {
+        turnIndicator.innerText = "Enter player names to start";
+        return;
+    }
+
+    if (gameFinished) {
+        turnIndicator.innerText = "Current Turn : Game Over";
+        return;
+    }
+
+    const currentSymbol = turnO ? "O" : "X";
+    turnIndicator.innerText = `Current Turn : ${players[currentSymbol]} (${currentSymbol})`;
 };
 
 const hideWinningLine = () => {
@@ -66,13 +91,16 @@ const showWinningLine = (pattern) => {
 
  boxes.forEach((box) => {
     box.addEventListener("click", () => {
-        console.log("box was clicked");
-        box.innerText = turn0 ? "0" : "X";
+        if (!gameStarted || gameFinished) {
+            return;
+        }
+
+        box.innerText = turnO ? "O" : "X";
         box.disabled = true;
 
-        const gameFinished = checkWin();
-        if (!gameFinished) {
-            turn0 = !turn0;
+        const roundFinished = checkWin();
+        if (!roundFinished) {
+            turnO = !turnO;
             updateTurnIndicator();
         }
     });
@@ -92,33 +120,31 @@ const enableBoxes = () => {
 };
 
 const showWinner = (winner, pattern) => {
-    msg.innerText = `Winner is ${winner}`;
+    gameFinished = true;
+    msg.innerText = `Winner is ${players[winner]} (${winner})`;
     scores[winner]++;
     updateScoreboard();
-    turnIndicator.innerText = "Current Turn : Game Over";
+    updateTurnIndicator();
     showWinningLine(pattern);
     disableBoxes();
 };
 
 const showDraw = () => {
+    gameFinished = true;
     msg.innerText = "Game was a draw";
     scores.draw++;
     updateScoreboard();
-    turnIndicator.innerText = "Current Turn : Game Over";
+    updateTurnIndicator();
 };
 
 const checkWin = () => {
     for (let pattern of winPatterns) {
-        
-        console.log(pattern[0], pattern[1], pattern[2]);
-
             let pos1Val = boxes[pattern[0]].innerText;
             let pos2Val = boxes[pattern[1]].innerText;
             let pos3Val = boxes[pattern[2]].innerText;
 
             if (pos1Val != ""&& pos2Val != ""&& pos3Val != "") {
                 if (pos1Val === pos2Val && pos2Val === pos3Val) {
-                    console.log("Winner: " + pos1Val);
                     showWinner(pos1Val, pattern);
                     return true;
             }
@@ -134,19 +160,79 @@ const checkWin = () => {
         return false;
     };
 
-    const resetGame = () =>{
-
-    turn0 = true;
+const resetBoard = () => {
+    turnO = false;
+    gameFinished = false;
 
     enableBoxes();
 
     msg.innerText = "";
     updateTurnIndicator();
     hideWinningLine();
-
 };
 
+const resetGame = () =>{
+    if (!gameStarted) {
+        msg.innerText = "Enter player names before starting the game.";
+        return;
+    }
+
+    resetBoard();
+};
+
+const startGame = (event) => {
+    event.preventDefault();
+
+    players.X = playerXNameInput.value.trim() || "Player X";
+    players.O = playerONameInput.value.trim() || "Player O";
+    scores = {
+        X: 0,
+        O: 0,
+        draw: 0
+    };
+    gameStarted = true;
+
+    updateScoreboard();
+    resetBoard();
+};
+
+const showFinalResult = () => {
+    if (!gameStarted) {
+        msg.innerText = "Enter player names before ending the game.";
+        return;
+    }
+
+    gameFinished = true;
+    disableBoxes();
+    hideWinningLine();
+    updateTurnIndicator();
+
+    if (scores.X === scores.O) {
+        msg.innerText = `Match drawn: ${players.X} ${scores.X} - ${scores.O} ${players.O}`;
+        return;
+    }
+
+    const winnerSymbol = scores.X > scores.O ? "X" : "O";
+    const loserSymbol = winnerSymbol === "X" ? "O" : "X";
+    const winningScore = scores[winnerSymbol];
+    const losingScore = scores[loserSymbol];
+    const margin = winningScore - losingScore;
+
+    msg.innerText = `${players[winnerSymbol]} wins the match by ${margin} point${margin === 1 ? "" : "s"} (${winningScore}-${losingScore})`;
+};
+
+const prepareInitialState = () => {
+    gameStarted = false;
+    gameFinished = false;
+    enableBoxes();
+    disableBoxes();
+    updateScoreboard();
+    updateTurnIndicator();
+};
+
+playerForm.addEventListener("submit", startGame);
 resetBtn.addEventListener("click", resetGame);
+gameOverBtn.addEventListener("click", showFinalResult);
 themeBtn.addEventListener("click", () => {
     document.body.classList.toggle("light-mode");
     document.body.classList.toggle("dark-mode");
@@ -155,5 +241,4 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = isLightMode ? "Dark Mode" : "Light Mode";
 });
 
-updateScoreboard();
-updateTurnIndicator();
+prepareInitialState();
