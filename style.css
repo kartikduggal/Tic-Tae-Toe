@@ -23,6 +23,12 @@ body.light-mode .scoreboard {
     color: #37515a;
 }
 
+body.light-mode .player-form input {
+    background-color: #fffefa;
+    color: #263238;
+    border-color: #9fc7cc;
+}
+
 body.light-mode #turn-indicator {
     color: #2f6f73;
 }
@@ -38,9 +44,45 @@ body.light-mode .box {
 }
 
 body.light-mode #reset-btn,
+body.light-mode #game-over-btn,
+body.light-mode #start-btn,
 body.light-mode #theme-btn {
     background-color: #2f6f73;
     color: white;
+}
+
+.player-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: end;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.player-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+.player-form input {
+    width: min(14rem, 78vw);
+    padding: 0.75rem 0.9rem;
+    border: 2px solid #ffffc7;
+    border-radius: 0.6rem;
+    background-color: #eff7f7;
+    color: #191913;
+    font-size: 1rem;
+    outline: none;
+}
+
+.player-form input:focus {
+    border-color: #ffd166;
+    box-shadow: 0 0 0 0.2rem rgba(255, 209, 102, 0.25);
 }
 
 .scoreboard {
@@ -92,6 +134,11 @@ body.light-mode #theme-btn {
     background-color: #ffffc7;
 }
 
+.box:disabled {
+    cursor: not-allowed;
+    opacity: 0.82;
+}
+
 #win-line {
     position: absolute;
     z-index: 2;
@@ -115,13 +162,21 @@ body.light-mode #win-line {
     box-shadow: 0 0 0.8rem rgba(255, 138, 101, 0.55);
 }
 
-#reset-btn {
+#reset-btn,
+#game-over-btn,
+#start-btn {
     padding: 1rem;
     font-size: 1.25rem;
     background-color: #191913;
     color: white;
     border-radius: 1rem;
     border: none;
+    cursor: pointer;
+}
+
+#game-over-btn {
+    margin-left: 0.75rem;
+    background-color: #5f1f1f;
 }
 
 #theme-btn {
