@@ -16,6 +16,7 @@ let game = document.querySelector(".game");
 let winLine = document.getElementById("win-line");
 
 let turnO = false; // false for X's turn, true for O's turn
+let nextRoundStartsWithO = false;
 let gameStarted = false;
 let gameFinished = false;
 let players = {
@@ -123,6 +124,7 @@ const showWinner = (winner, pattern) => {
     gameFinished = true;
     msg.innerText = `Winner is ${players[winner]} (${winner})`;
     scores[winner]++;
+    nextRoundStartsWithO = winner === "O";
     updateScoreboard();
     updateTurnIndicator();
     showWinningLine(pattern);
@@ -161,7 +163,7 @@ const checkWin = () => {
     };
 
 const resetBoard = () => {
-    turnO = false;
+    turnO = nextRoundStartsWithO;
     gameFinished = false;
 
     enableBoxes();
@@ -190,6 +192,7 @@ const startGame = (event) => {
         O: 0,
         draw: 0
     };
+    nextRoundStartsWithO = false;
     gameStarted = true;
 
     updateScoreboard();
