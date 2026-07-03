@@ -20,7 +20,18 @@ body.light-mode {
 }
 
 body.light-mode .scoreboard {
+    background-color: rgba(255, 254, 250, 0.78);
+    border-color: rgba(47, 111, 115, 0.28);
     color: #37515a;
+}
+
+body.light-mode .player-number,
+body.light-mode .score-divider {
+    color: #2f6f73;
+}
+
+body.light-mode .score-value {
+    color: #d45b45;
 }
 
 body.light-mode .player-form input {
@@ -49,6 +60,19 @@ body.light-mode #start-btn,
 body.light-mode #theme-btn {
     background-color: #2f6f73;
     color: white;
+}
+
+.app-shell {
+    display: grid;
+    grid-template-columns: minmax(16rem, 21rem) 1fr;
+    gap: 2rem;
+    min-height: 100vh;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.game-panel {
+    min-width: 0;
 }
 
 .player-form {
@@ -86,14 +110,68 @@ body.light-mode #theme-btn {
 }
 
 .scoreboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
+    align-self: start;
+    position: sticky;
+    top: 1.5rem;
+    min-height: calc(100vh - 3rem);
+    padding: 1.25rem;
+    border: 2px solid rgba(255, 255, 199, 0.38);
+    border-radius: 0.75rem;
+    background-color: rgba(25, 25, 19, 0.24);
     color: white;
-    font-size: 1.25rem;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.scoreboard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.scoreboard-players {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0.9rem;
+}
+
+.score-player {
+    min-width: 0;
+}
+
+.player-number {
+    color: #ffffc7;
+    font-size: 0.95rem;
     font-weight: bold;
-    margin-top: 1rem;
+    margin-bottom: 0.45rem;
+}
+
+.player-name {
+    min-height: 3rem;
+    overflow-wrap: anywhere;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.score-value {
+    margin-top: 0.75rem;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffd166;
+}
+
+.score-divider {
+    display: flex;
+    align-items: center;
+    color: #ffffc7;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.draw-score {
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    font-weight: bold;
 }
 
 #turn-indicator {
@@ -200,4 +278,15 @@ body.light-mode #win-line {
     margin-top:1rem;
     margin-bottom:1rem;
     font-weight:bold;
+}
+
+@media (max-width: 900px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .scoreboard {
+        position: static;
+        min-height: auto;
+    }
 }

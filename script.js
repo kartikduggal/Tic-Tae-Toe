@@ -211,7 +211,7 @@ const showFinalResult = () => {
     updateTurnIndicator();
 
     if (scores.X === scores.O) {
-        msg.innerText = `Match drawn: ${players.X} ${scores.X} - ${scores.O} ${players.O}`;
+        msg.innerText = `Match drawn on total score: ${players.X} ${scores.X} - ${scores.O} ${players.O}`;
         return;
     }
 
@@ -221,7 +221,7 @@ const showFinalResult = () => {
     const losingScore = scores[loserSymbol];
     const margin = winningScore - losingScore;
 
-    msg.innerText = `${players[winnerSymbol]} wins the match by ${margin} point${margin === 1 ? "" : "s"} (${winningScore}-${losingScore})`;
+    msg.innerText = `${players[winnerSymbol]} wins by total score ${winningScore}-${losingScore} (${margin} point${margin === 1 ? "" : "s"})`;
 };
 
 const prepareInitialState = () => {

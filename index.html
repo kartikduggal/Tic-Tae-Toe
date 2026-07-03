@@ -5,43 +5,57 @@
 </head>
 <link rel="stylesheet" href="style.css">
 <body class="dark-mode">
-<main>
-    <h1>Tic Tac Toe</h1>
-    <form id="player-form" class="player-form">
-        <label>
-            Player X
-            <input id="player-x-name" type="text" placeholder="Enter name" required>
-        </label>
-        <label>
-            Player O
-            <input id="player-o-name" type="text" placeholder="Enter name" required>
-        </label>
-        <button id="start-btn" type="submit">Start Game</button>
-    </form>
-    <div class="scoreboard">
-        <p><span id="x-player-label">Player X</span> Wins: <span id="x-score">0</span></p>
-        <p><span id="o-player-label">Player O</span> Wins: <span id="o-score">0</span></p>
-        <p>Draws: <span id="draw-score">0</span></p>
-    </div>
-    <p id="turn-indicator">Enter player names to start</p>
-    <p id="msg"></p>
-    <div class="container">
-        <div class ="game">
-            <button class="box"></button>
-            <button class="box"></button>
-            <button class="box"></button>
-            <button class="box"></button>
-            <button class="box"></button>
-            <button class="box"></button>
-            <button class="box"></button>
-            <button class="box"></button>
-            <button class="box"></button>
-            <div id="win-line"></div>
+<main class="app-shell">
+    <aside class="scoreboard">
+        <h2>Scoreboard</h2>
+        <div class="scoreboard-players">
+            <div class="score-player">
+                <p class="player-number">Player 1</p>
+                <p id="x-player-label" class="player-name">Player X</p>
+                <p class="score-value"><span id="x-score">0</span></p>
+            </div>
+            <span class="score-divider">|</span>
+            <div class="score-player">
+                <p class="player-number">Player 2</p>
+                <p id="o-player-label" class="player-name">Player O</p>
+                <p class="score-value"><span id="o-score">0</span></p>
+            </div>
         </div>
-    </div>
-    <button id="reset-btn">Reset Game</button>
-    <button id="game-over-btn">Game Over</button>
-    <button id="theme-btn">Light Mode</button>
+        <p class="draw-score">Draws: <span id="draw-score">0</span></p>
+    </aside>
+    <section class="game-panel">
+        <h1>Tic Tac Toe</h1>
+        <form id="player-form" class="player-form">
+            <label>
+                Player X
+                <input id="player-x-name" type="text" placeholder="Enter name" required>
+            </label>
+            <label>
+                Player O
+                <input id="player-o-name" type="text" placeholder="Enter name" required>
+            </label>
+            <button id="start-btn" type="submit">Start Game</button>
+        </form>
+        <p id="turn-indicator">Enter player names to start</p>
+        <p id="msg"></p>
+        <div class="container">
+            <div class ="game">
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <div id="win-line"></div>
+            </div>
+        </div>
+        <button id="reset-btn">Reset Game</button>
+        <button id="game-over-btn">Game Over</button>
+        <button id="theme-btn">Light Mode</button>
+    </section>
 </main>
 <script src="script.js"></script>
 
