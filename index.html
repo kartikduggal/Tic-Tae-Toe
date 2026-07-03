@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tic-Tae-Toe{KD}</title>
+    <title></title>
 </head>
 <link rel="stylesheet" href="style.css">
 <body class="dark-mode">
 <main>
     <h1>Tic Tac Toe</h1>
+    <form id="player-form" class="player-form">
+        <label>
+            Player X
+            <input id="player-x-name" type="text" placeholder="Enter name" required>
+        </label>
+        <label>
+            Player O
+            <input id="player-o-name" type="text" placeholder="Enter name" required>
+        </label>
+        <button id="start-btn" type="submit">Start Game</button>
+    </form>
     <div class="scoreboard">
-        <p>X Wins: <span id="x-score">0</span></p>
-        <p>0 Wins: <span id="o-score">0</span></p>
+        <p><span id="x-player-label">Player X</span> Wins: <span id="x-score">0</span></p>
+        <p><span id="o-player-label">Player O</span> Wins: <span id="o-score">0</span></p>
         <p>Draws: <span id="draw-score">0</span></p>
     </div>
-    <p id="turn-indicator">Current Turn : 0</p>
+    <p id="turn-indicator">Enter player names to start</p>
     <p id="msg"></p>
     <div class="container">
         <div class ="game">
@@ -29,6 +40,7 @@
         </div>
     </div>
     <button id="reset-btn">Reset Game</button>
+    <button id="game-over-btn">Game Over</button>
     <button id="theme-btn">Light Mode</button>
 </main>
 <script src="script.js"></script>
