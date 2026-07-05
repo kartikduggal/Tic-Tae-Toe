@@ -34,6 +34,15 @@
                 Player O
                 <input id="player-o-name" type="text" placeholder="Enter name" required>
             </label>
+            <button id="ai-mode-btn" class="mode-btn" type="button" aria-pressed="false">Play with AI</button>
+            <label id="ai-level-control" class="ai-level-control">
+                AI Level
+                <select id="ai-level">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </label>
             <button id="start-btn" type="submit">Start Game</button>
         </form>
         <p id="turn-indicator">Enter player names to start</p>
@@ -54,6 +63,7 @@
         </div>
         <button id="reset-btn">Reset Game</button>
         <button id="game-over-btn">Game Over</button>
+        <button id="mute-btn" type="button" aria-pressed="false">Mute Sound</button>
         <button id="theme-btn">Light Mode</button>
     </section>
 </main>

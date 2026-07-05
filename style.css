@@ -34,7 +34,8 @@ body.light-mode .score-value {
     color: #d45b45;
 }
 
-body.light-mode .player-form input {
+body.light-mode .player-form input,
+body.light-mode .player-form select {
     background-color: #fffefa;
     color: #263238;
     border-color: #9fc7cc;
@@ -57,9 +58,16 @@ body.light-mode .box {
 body.light-mode #reset-btn,
 body.light-mode #game-over-btn,
 body.light-mode #start-btn,
+body.light-mode #ai-mode-btn,
+body.light-mode #mute-btn,
 body.light-mode #theme-btn {
     background-color: #2f6f73;
     color: white;
+}
+
+body.light-mode #ai-mode-btn.active,
+body.light-mode #mute-btn.active {
+    background-color: #d45b45;
 }
 
 .app-shell {
@@ -93,7 +101,8 @@ body.light-mode #theme-btn {
     text-align: left;
 }
 
-.player-form input {
+.player-form input,
+.player-form select {
     width: min(14rem, 78vw);
     padding: 0.75rem 0.9rem;
     border: 2px solid #ffffc7;
@@ -104,9 +113,27 @@ body.light-mode #theme-btn {
     outline: none;
 }
 
-.player-form input:focus {
+.player-form select {
+    cursor: pointer;
+}
+
+.player-form input:focus,
+.player-form select:focus {
     border-color: #ffd166;
     box-shadow: 0 0 0 0.2rem rgba(255, 209, 102, 0.25);
+}
+
+.player-form input:disabled {
+    cursor: not-allowed;
+    opacity: 0.78;
+}
+
+.ai-level-control {
+    display: none;
+}
+
+.ai-level-control.show {
+    display: flex;
 }
 
 .scoreboard {
@@ -242,7 +269,9 @@ body.light-mode #win-line {
 
 #reset-btn,
 #game-over-btn,
-#start-btn {
+#start-btn,
+#ai-mode-btn,
+#mute-btn {
     padding: 1rem;
     font-size: 1.25rem;
     background-color: #191913;
@@ -250,6 +279,18 @@ body.light-mode #win-line {
     border-radius: 1rem;
     border: none;
     cursor: pointer;
+}
+
+#ai-mode-btn.active {
+    background-color: #8f2d2d;
+}
+
+#mute-btn {
+    margin-left: 0.75rem;
+}
+
+#mute-btn.active {
+    background-color: #8f2d2d;
 }
 
 #game-over-btn {
